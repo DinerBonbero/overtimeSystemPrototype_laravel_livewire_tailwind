@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('overtime_sheets', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('division_id')->constrained();
+            $table->tinyInteger('submit_status')->default(0);
+            $table->dateTime('submitted_at')->nullable();
             $table->timestamps();
         });
     }
