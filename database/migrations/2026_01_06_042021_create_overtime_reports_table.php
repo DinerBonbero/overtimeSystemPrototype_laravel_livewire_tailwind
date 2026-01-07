@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('overtime_reports', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('overtime_sheet_id')->constrained();
+            $table->dateTime('actual_start_at');
+            $table->dateTime('actual_end_at');
+            $table->unsignedTinyInteger('rest_hours');
+            $table->unsignedTinyInteger('rest_minutes');
+            $table->string('detail', length: 200);
             $table->timestamps();
+            //日付や時刻にはdatetime,timestamp,dateなどを使用する
+            //時間の長さにはunsignedTinyIntegerなどの数値型を使用する
         });
     }
 
