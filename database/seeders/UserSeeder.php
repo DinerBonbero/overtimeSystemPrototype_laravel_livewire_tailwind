@@ -23,7 +23,6 @@ class UserSeeder extends Seeder
                 'role_id' => 1,
                 'name' => '一般社員1',
                 'email' => 'syain1@example.com',
-                'email_verified_at' => null,
                 'password' => Hash::make('syain1'),
             ],
             [
@@ -31,7 +30,6 @@ class UserSeeder extends Seeder
                 'role_id' => 1,
                 'name' => '一般社員2',
                 'email' => 'syain2@example.com',
-                'email_verified_at' => null,
                 'password' => Hash::make('syain2'),
             ],
             [
@@ -39,7 +37,6 @@ class UserSeeder extends Seeder
                 'role_id' => 2,
                 'name' => '次長',
                 'email' => 'jityou1@example.com',
-                'email_verified_at' => null,
                 'password' => Hash::make('jityou1'),
             ],
             [
@@ -47,12 +44,11 @@ class UserSeeder extends Seeder
                 'role_id' => 3,
                 'name' => '課長',
                 'email' => 'katyou1@example.com',
-                'email_verified_at' => null,
                 'password' => Hash::make('katyou1'),
             ],
             [
                 'division_id' => 1,
-                'role_id' => 1,
+                'role_id' => 4,
                 'name' => '部長',
                 'email' => 'butyou1@example.com',
                 //'email_verified_at' => null, ※nullableがデフォルトで記述されているので不要
