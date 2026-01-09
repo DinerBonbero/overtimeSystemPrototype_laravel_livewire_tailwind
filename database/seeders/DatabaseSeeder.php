@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,23 +15,42 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
 
         //呼び出す順番に注意　※未設定
-        // $this->call([
-        //     UserSeeder::class,
-        //     OvertimeSheetSeeder::class,
-        //     OvertimeReportSeeder::class,
-        //     OvertimeRequestSeeder::class,
-        //     DivisionSeeder::class,
-        //     RoleSeeder::class,
-        //     WorkPatternSeeder::class,
-        // ]);
+        $this->call([
+            DivisionSeeder::class,
+            RoleSeeder::class,
+            WorkPatternSeeder::class,
+            UserSeeder::class, //ログイン用の各社員のマスタシーダ
+            OvertimeSheetSeeder::class,
+            OvertimeReportSeeder::class,
+            OvertimeRequestSeeder::class,
+        ]);
+
+        //↓以下は大人数を想定して
+
+        User::factory()->count(100)->create();
+
+        $roleDivisionIds = [];
+
+        for ($j = 2; $j <= 7; $j++) { //ログイン用のマスタシーダ(営業部)以外の各部署の次長
+            $roleDivisionIds[] = ['role_id' => 2, 'division_id' => $j]; //'division_id' => 1は営業部のなので除外
+        }
+
+        for ($k = 2; $k <= 7; $k++) { //ログイン用のマスタシーダ(営業部)以外の各部署の課長
+            $roleDivisionIds[] = ['role_id' => 3, 'division_id' => $k]; //'division_id' => 1は営業部のなので除外
+        }
+
+        for ($l = 2; $l <= 7; $l++) { //ログイン用のマスタシーダ(営業部)以外の各部署の部長
+            $roleDivisionIds[] = ['role_id' => 4, 'division_id' => $l]; //'division_id' => 1は営業部のなので除外
+        }
+
+        // dd($roleDivisionIds);
+        // exit();
+
+        //繰り返し処理などの文（statement）を扱うときは引数の外で扱う
+
+        User::factory()->count(18)->state(new Sequence($roleDivisionIds))->create(); //引数にはforなどの値以外のもの文statementなどは入れることができない！時間ロス！
 
         //\App\Models\User::truncate();
     }
