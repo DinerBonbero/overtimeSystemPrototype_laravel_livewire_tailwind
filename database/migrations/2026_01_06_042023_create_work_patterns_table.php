@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('work_patterns', function (Blueprint $table) {
             $table->id();
             $table->string('name', length: 100);
+            $table->time('start_time');
+            $table->time('end_time');
             $table->timestamps();
         });
     }
