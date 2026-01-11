@@ -22,9 +22,9 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             WorkPatternSeeder::class,
             UserSeeder::class, //ログイン用の各社員のマスタシーダ
-            OvertimeSheetSeeder::class,
-            OvertimeReportSeeder::class,
-            OvertimeRequestSeeder::class,
+            // OvertimeSheetSeeder::class,
+            // OvertimeReportSeeder::class,
+            // OvertimeRequestSeeder::class,
         ]);
 
         //↓以下は大人数を想定して
@@ -51,6 +51,7 @@ class DatabaseSeeder extends Seeder
         //繰り返し処理などの文（statement）を扱うときは引数の外で扱う
 
         User::factory()->count(18)->state(new Sequence($roleDivisionIds))->create(); //引数にはforなどの値以外のもの文statementなどは入れることができない！時間ロス！
+        //Sequence($roleDivisionIds)の引数は可変長引数　@param mixed ...$sequence
 
         //\App\Models\User::truncate();
     }
