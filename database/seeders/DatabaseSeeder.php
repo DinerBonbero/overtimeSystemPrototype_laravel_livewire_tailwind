@@ -50,8 +50,9 @@ class DatabaseSeeder extends Seeder
 
         //繰り返し処理などの文（statement）を扱うときは引数の外で扱う
 
-        User::factory()->count(18)->state(new Sequence($roleDivisionIds))->create(); //引数にはforなどの値以外のもの文statementなどは入れることができない！時間ロス！
-        //Sequence($roleDivisionIds)の引数は可変長引数　@param mixed ...$sequence
+        User::factory()->count(18)->state(new Sequence(...$roleDivisionIds))->create(); //引数にはforなどの値以外のもの文statementなどは入れることができない！時間ロス！
+        //Sequence($roleDivisionIds)の引数は可変長引数　@param mixed ...$sequence　※配列リテラルか多次元配列を入れる、多次元配列の場合は…の可変長引数を使用する
+        //可変長引数(...$param)は引数の数が不定の場合に使用する。配列の[]を取り除いて個々の値として扱う。
 
         //\App\Models\User::truncate();
     }
