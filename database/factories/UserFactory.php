@@ -26,7 +26,7 @@ class UserFactory extends Factory
         
         return [
 
-            'division_id' => $this->fake()->numberBetween(2, 7),
+            'division_id' => $this->faker->numberBetween(2, 7),
             'role_id' => 1,
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
