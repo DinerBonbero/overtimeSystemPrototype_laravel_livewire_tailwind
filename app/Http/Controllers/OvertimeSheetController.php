@@ -20,7 +20,7 @@ class OvertimeSheetController extends Controller
      */
     public function create()
     {
-        //
+        return view('overtime_sheets.create');
     }
 
     /**
