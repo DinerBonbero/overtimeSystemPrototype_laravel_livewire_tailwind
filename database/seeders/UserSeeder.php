@@ -35,16 +35,16 @@ class UserSeeder extends Seeder
             [
                 'division_id' => 1,
                 'role_id' => 2,
-                'name' => '次長',
-                'email' => 'jityou1@example.com',
-                'password' => Hash::make('jityou1'),
+                'name' => '課長',
+                'email' => 'katyou1@example.com',
+                'password' => Hash::make('katyou1'),
             ],
             [
                 'division_id' => 1,
                 'role_id' => 3,
-                'name' => '課長',
-                'email' => 'katyou1@example.com',
-                'password' => Hash::make('katyou1'),
+                'name' => '次長',
+                'email' => 'jityou1@example.com',
+                'password' => Hash::make('jityou1'),
             ],
             [
                 'division_id' => 1,

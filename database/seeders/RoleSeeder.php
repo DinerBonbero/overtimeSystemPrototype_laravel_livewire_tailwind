@@ -19,10 +19,10 @@ class RoleSeeder extends Seeder
                 'name' => '一般社員'
             ],
             [
-                'name' => '次長'
+                'name' => '課長'
             ],
             [
-                'name' => '課長'
+                'name' => '次長'
             ],
             [
                 'name' => '部長'

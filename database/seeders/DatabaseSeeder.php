@@ -33,11 +33,11 @@ class DatabaseSeeder extends Seeder
 
         $roleDivisionIds = [];
 
-        for ($j = 2; $j <= 7; $j++) { //ログイン用のマスタシーダ(営業部)以外の各部署の次長('role_id' => 2)
+        for ($j = 2; $j <= 7; $j++) { //ログイン用のマスタシーダ(営業部)以外の各部署の課長('role_id' => 2)
             $roleDivisionIds[] = ['role_id' => 2, 'division_id' => $j]; //'division_id' => 1は営業部のなので除外
         }
 
-        for ($k = 2; $k <= 7; $k++) { //ログイン用のマスタシーダ(営業部)以外の各部署の課長('role_id' => 3)
+        for ($k = 2; $k <= 7; $k++) { //ログイン用のマスタシーダ(営業部)以外の各部署の次長('role_id' => 3)
             $roleDivisionIds[] = ['role_id' => 3, 'division_id' => $k]; //'division_id' => 1は営業部のなので除外
         }
 
