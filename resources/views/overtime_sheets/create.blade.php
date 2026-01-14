@@ -32,7 +32,7 @@
                             </tr>
                         </table>
                         @error('division')
-                            <div>{{ $message }}</div>
+                            <div class="text-red-500">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="col-end-8 col-span-3">
@@ -66,7 +66,7 @@
                     </tr>
                 </table>
                 @error('work_pattern')
-                    <div>{{ $message }}</div>
+                    <div class="text-red-500">{{ $message }}</div>
                 @enderror
                 <table class="m-auto mt-6 border-collapse w-full text-center">
                     <tr>
@@ -112,19 +112,22 @@
                     </tr>
                 </table>
                 @error('plan_start_date')
-                    <div>{{ $message }}</div>
+                    <div class="text-red-500">{{ $message }}</div>
                 @enderror
                 @error('plan_start_hour')
-                    <div>{{ $message }}</div>
+                    <div class="text-red-500">{{ $message }}</div>
                 @enderror
                 @error('plan_start_minute')
-                    <div>{{ $message }}</div>
+                    <div class="text-red-500">{{ $message }}</div>
                 @enderror
+                @error('plan_start_minute')
+                    <div class="text-red-500">{{ $message }}</div>
+                @enderror 
                 @error('plan_end_hour')
-                    <div>{{ $message }}</div>
+                    <div class="text-red-500">{{ $message }}</div>
                 @enderror
                 @error('plan_end_minute')
-                    <div>{{ $message }}</div>
+                    <div class="text-red-500">{{ $message }}</div>
                 @enderror
                 <table class="mt-6 border-collapse w-full text-center">
                     <tr>
@@ -139,7 +142,7 @@
                     </tr>
                 </table>
                 @error('cause')
-                    <div>{{ $message }}</div>
+                    <div class="text-red-500">{{ $message }}</div>
                 @enderror
                 <!-- 残業申登録録ボタン -->
                 <div class="text-center mt-6">
