@@ -12,3 +12,10 @@ select {
     background-color: #eeeeee;
     cursor: pointer;
 }
+
+textarea {
+    border-radius: 2px;
+    padding: 1px 3px;
+    background-color: #ffffff;
+    cursor: text;
+}
