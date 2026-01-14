@@ -37,8 +37,8 @@ class OvertimeSheetController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'division_id' => 'required|exists:divisions,id',
-            'work_pattern_id' => 'required|exists:work_patterns,id',
+            'division' => 'required|exists:divisions,id',
+            'work_pattern' => 'required|exists:work_patterns,id',
             'plan_start_date' => ['required', Rule::date()->format('Y-m-d')],
             'plan_start_hour' => 'required|integer|min:0|max:23',
             'plan_start_minute' => 'required|integer|min:0|max:59',
@@ -46,8 +46,8 @@ class OvertimeSheetController extends Controller
             'plan_end_minute' => 'required|integer|min:0|max:59',
             'cause' => 'required|string|max:200',
         ],[
-            'division_id.required' => '部署は必須です。',
-            'work_pattern_id.required' => '勤務パターンは必須です。',
+            'division.required' => '部署は必須です。',
+            'work_pattern.required' => '勤務パターンは必須です。',
             'plan_start_date.required' => '予定開始日は必須です。',
             'plan_start_hour.required' => '予定開始時刻（時）は必須です。',
             'plan_start_minute.required' => '予定開始時刻（分）は必須です。',
