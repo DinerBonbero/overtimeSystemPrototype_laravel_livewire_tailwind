@@ -6,12 +6,12 @@
 
     <body>
         <div class="container w-7/11 mx-auto text-base">
-            <!-- 残業申請一覧タイトル -->
-            <div class="text-center mt-6">
+            <!-- タイトル -->
+            <div class="text-center mt-6 text-2xl">
                 <h1>残業申請</h1>
             </div>
 
-            <!-- 表示する期間 -->
+            <!-- 残業申請 -->
             <form action="{{ route('overtime_sheets.store') }}" method="POST">
                 @csrf
                 <div class="pt-2 mx-auto grid grid-cols-7 w-full">
@@ -120,9 +120,6 @@
                 @error('plan_start_minute')
                     <div class="text-red-500">{{ $message }}</div>
                 @enderror
-                @error('plan_start_minute')
-                    <div class="text-red-500">{{ $message }}</div>
-                @enderror 
                 @error('plan_end_hour')
                     <div class="text-red-500">{{ $message }}</div>
                 @enderror
@@ -137,7 +134,7 @@
                     </tr>
                     <tr>
                         <td class="border border-black px-2 py-1">
-                            <textarea name="cause" id="cause" class="w-full"></textarea>
+                            <textarea name="cause" id="cause" class="w-full">{{ old('cause') }}</textarea>
                         </td>
                     </tr>
                 </table>
