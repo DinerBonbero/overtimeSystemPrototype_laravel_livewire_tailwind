@@ -9,4 +9,8 @@ class OvertimeReport extends Model
 {
     /** @use HasFactory<\Database\Factories\OvertimeReportFactory> */
     use HasFactory;
+
+    protected $guarded = [
+        'id'
+    ];
 }
