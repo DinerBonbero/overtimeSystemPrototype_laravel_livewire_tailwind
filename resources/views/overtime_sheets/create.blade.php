@@ -141,11 +141,11 @@
                 @error('cause')
                     <div>{{ $message }}</div>
                 @enderror
+                <!-- 残業申登録録ボタン -->
+                <div class="text-center mt-6">
+                    <x-ui.button message="登録する" class="bg-blue-600 hover:bg-blue-700 py-1 px-2" />
+                </div>
             </form>
-            <!-- 残業申登録録ボタン -->
-            <div class="text-center mt-6">
-                <x-ui.button message="登録する" class="bg-blue-600 hover:bg-blue-700 py-1 px-2" />
-            </div>
         </div>
     </body>
 
