@@ -54,6 +54,13 @@ class OvertimeSheetController extends Controller
             'plan_end_hour.required' => '予定終了時刻（時）は必須です。',
             'plan_end_minute.required' => '予定終了時刻（分）は必須です。',
             'cause.required' => '残業理由は必須です。',
+            'exists' => '選択された値が正しくありません。',
+            'date.format' => '予定開始日はYYYY-MM-DD形式で入力してください。',
+            'integer' => '時刻は整数で入力してください。',
+            'min' => '時刻の値が範囲外です。',
+            'max' => '時刻の値が範囲外です。',
+            'cause.string' => '残業理由は文字列で入力してください。',
+            'cause.max' => '残業理由は200文字以内で入力してください。',
         ]);
         
         return view('overtime_sheets.index');
