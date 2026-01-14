@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Division;
+use App\Models\WorkPattern;
+use Illuminate\Support\Facades\Auth;
 
 class OvertimeSheetController extends Controller
 {
@@ -20,7 +23,11 @@ class OvertimeSheetController extends Controller
      */
     public function create()
     {
-        return view('overtime_sheets.create');
+        $divisions = Division::pluck('name', 'id');
+        $workPatterns = WorkPattern::select('id', 'name', 'start_time', 'end_time')->get();
+        $user = Auth::user('name');
+
+        return view('overtime_sheets.create', compact('divisions', 'workPatterns', 'user'));
     }
 
     /**
@@ -28,7 +35,8 @@ class OvertimeSheetController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        return view('overtime_sheets.index');
     }
 
     /**
