@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Division;
+use App\Models\OvertimeSheet;
 use App\Models\WorkPattern;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -65,6 +66,12 @@ class OvertimeSheetController extends Controller
             'cause.string' => '残業理由は文字列で入力してください。',
             'cause.max' => '残業理由は200文字以内で入力してください。',
         ]);
+
+        // OvertimeSheet::create([
+        //     'user_id' => Auth::id(),
+        //     'division_id' => $validated['division'],
+        //     'submit_status' => 0
+        // ]);
         
         return view('overtime_sheets.index');
     }
