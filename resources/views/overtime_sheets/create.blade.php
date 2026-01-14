@@ -1,3 +1,7 @@
+{{-- @php
+    dd($divisions);
+    dd($workPatterns);
+@endphp --}}
 <x-layouts.app.header>
 
     <body>
@@ -15,20 +19,26 @@
                         <tr class="border border-black w-full">
                             <td class="py-1 pl-2 pr-4 text-center"><label for="division">部署名</label></td>
                             <td class="pr-2 py-1">
-                                <select name="division" id="division" class="py-1 px-3 w-full">
+                                <select name="division" id="division" class="px-3 w-full">
                                     <option value="">選択してください</option>
-                                    <option value="1">通常勤務</option>
-                                    <option value="2">残業勤務</option>
+                                    @foreach ($divisions as $key => $division)
+                                        <option value="{{ $key }}">{{ $division }}</option>
+                                    @endforeach
                                 </select>
                             </td>
                         </tr>
                     </table>
+                    @error('division')
+                        <div>{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="col-end-8 col-span-3">
                     <table class="border-collapse ml-auto">
                         <tr class="border border-black w-full">
                             <td class="py-1 pl-2 pr-4 text-center"><label for="name">名前</label></td>
-                            <td class="pr-2 py-1"><input type="text" id="name" name="name" class="w-full"></td>
+                            <td class="pr-2 py-1">
+                                {{ $user->name }}
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -38,70 +48,75 @@
                     <td class="border border-black px-2 py-1 w-1/4">勤務パターン</td>
                     <td class="border border-black px-2 py-1 w-3/4 text-center">
                         <select name="work_pattern" id="work_pattern" class="px-10">
-                            <option value="">選択してください</option>
-                            <option value="1">通常勤務</option>
-                            <option value="2">残業勤務</option>
+                            <option value="" class="text-center">選択してください</option>
+                            @foreach ($workPatterns as $workPattern)
+                                <option value="{{ $workPattern->id }}">
+                                    {{ $workPattern->name }}
+                                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    {{-- ノーブレイクスペースブラウザに消されないスペース --}}
+                                    {{ $workPattern->start_time }} ～ {{ $workPattern->end_time }}
+                                </option>
+                            @endforeach
                         </select>
                     </td>
                 </tr>
             </table>
+            @error('work_pattern')
+                <div>{{ $message }}</div>
+            @enderror
             <table class="m-auto mt-6 border-collapse w-full text-center">
                 <tr>
                     <td class="border border-black px-2 py-1 w-1/4">残業予定時間</td>
                     <td class="border border-black px-2 py-1 w-3/4 text-xs">
                         <input type="date" id="plan_start_date" name="plan_start_date">
                         <select name="plan_start_hour" id="plan_start_hour">
-                            <option value="">選択してください</option>
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
-                        </select><label for="plan_start_hour">時</label>
-                        <select name="plan_start_minute" id="plan_start_minute"
-                            class="bg-gray-200 border">
-                            <option value="">選択してください</option>
-                            <option value="00">00</option>
-                            <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="45">45</option>
-                        </select><label for="plan_start_minute">分</label>
+                            @for ($i = 0; $i <= 23; $i++)
+                                @php $planStartHour = str_pad($i, 2, 0, STR_PAD_LEFT); @endphp
+                                <option value="{{ $planStartHour }}">{{ $planStartHour }}</option>
+                                {{-- str_pad($i, 2, 0, STR_PAD_LEFT)は2桁になるように左側に0を追加する関数で返り値は文字列 --}}
+                                {{-- ループ変数に関数の戻り値を代入したりしない$i = str_pad($i, 2, 0, STR_PAD_LEFT)にしてしまうと$iが整数型から文字列型に変わりバグの原因になる --}}
+                                {{-- コメント内の出力括弧に気を付ける、エンコードエラー --}}
+                            @endfor
+                        </select>
+                        <label for="plan_start_hour">時</label>
+                        <select name="plan_start_minute" id="plan_start_minute" class="bg-gray-200 border">
+                            @for ($i = 0; $i <= 45; $i += 15)
+                                @php $planStartMinute = str_pad($i, 2, 0, STR_PAD_LEFT); @endphp
+                                <option value="{{ $planStartMinute }}">{{ $planStartMinute }}</option>
+                            @endfor
+                        </select>
+                        <label for="plan_start_minute">分</label>
                         <span>～</span>
-                        <input type="date" id="plan_end_date" name="plan_end_date">
                         <select name="plan_end_hour" id="plan_end_hour">
-                            <option value="">選択してください</option>
-                            <option value="0">0</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
+                            @for ($i = 0; $i <= 23; $i++)
+                                @php $planEndHour = str_pad($i, 2, 0, STR_PAD_LEFT); @endphp
+                                <option value="{{ $planEndHour }}">{{ $planEndHour }}</option>
+                            @endfor
                         </select><label for="plan_end_hour">時</label>
                         <select name="plan_end_minute" id="plan_end_minute">
-                            <option value="">選択してください</option>
-                            <option value="00">00</option>
-                            <option value="15">15</option>
-                            <option value="30">30</option>
-                            <option value="45">45</option>
+                            @for ($i = 0; $i <= 45; $i += 15)
+                                @php $planEndMinute = str_pad($i, 2, 0, STR_PAD_LEFT);@endphp
+                                <option value="{{ $planEndMinute }}">{{ $planEndMinute }}</option>
+                            @endfor
                         </select><label for="plan_end_minute">分</label>
                     </td>
                 </tr>
             </table>
+            @error('plan_start_date')
+                <div>{{ $message }}</div>
+            @enderror
+            @error('plan_start_hour')
+                <div>{{ $message }}</div>
+            @enderror
+            @error('plan_start_minute')
+                <div>{{ $message }}</div>
+            @enderror
+            @error('plan_end_hour')
+                <div>{{ $message }}</div>
+            @enderror
+            @error('plan_end_minute')
+                <div>{{ $message }}</div>
+            @enderror
             <table class="mt-6 border-collapse w-full text-center">
                 <tr>
                     <td class="border border-black px-2 py-1">
@@ -114,7 +129,9 @@
                     </td>
                 </tr>
             </table>
-
+            @error('cause')
+                <div>{{ $message }}</div>
+            @enderror
             <!-- 残業申登録録ボタン -->
             <div class="text-center mt-6">
                 <x-ui.button message="登録する" class="bg-blue-600 hover:bg-blue-700 py-1 px-2" />
