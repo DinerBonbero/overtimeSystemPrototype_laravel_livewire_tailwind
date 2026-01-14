@@ -1,1 +1,1 @@
-<button type="button" {{ $attributes->merge(['class' => 'text-white font-font-mono rounded-sm cursor-pointer border-2 border-gray-300']) }}>{{ $message }}</button>
+<button type="button" {{ $attributes->merge(['class' => 'text-white font-font-mono cursor-pointer border-2 border-gray-300 rounded-lg']) }}>{{ $message }}</button>

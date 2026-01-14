@@ -1,1 +1,1 @@
-<a {{ $attributes->merge(['class' => 'text-white font-font-mono rounded-sm cursor-pointer border-2 border-gray-300']) }}>{{ $message }}</a>
+<a {{ $attributes->merge(['class' => 'text-white font-font-mono cursor-pointer border-2 border-gray-300 rounded-lg']) }}>{{ $message }}</a>
