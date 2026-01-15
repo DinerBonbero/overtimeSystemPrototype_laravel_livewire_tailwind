@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class OvertimeRequest extends Model
 {
@@ -13,5 +14,20 @@ class OvertimeRequest extends Model
     protected $guarded = [
         'id'
     ];
+
+    public function overtimeSheet(): BelongsTo
+    {
+        return $this->belongsTo(OvertimeSheet::class);
+    }
+
+    public function workPattern(): BelongsTo
+    {
+        return $this->belongsTo(WorkPattern::class);
+    }
+
+    public function role(): BelongsTo
+    {
+        return $this->belongsTo(Role::class);
+    }
     
 }
