@@ -84,6 +84,7 @@ class OvertimeSheetController extends Controller
             'application_status' => 0 //0=未申請、1=申請、2=承認依頼、3=承認済み
         ]);
         
+        //トランザクション処理にする
         return view('overtime_sheets.index');
     }
 
