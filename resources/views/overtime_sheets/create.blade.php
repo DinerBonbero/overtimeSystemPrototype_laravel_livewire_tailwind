@@ -72,7 +72,7 @@
                     <tr>
                         <td class="border border-black px-2 py-1 w-1/4">残業予定時間</td>
                         <td class="border border-black px-2 py-1 w-3/4 text-xs">
-                            <input type="date" id="plan_start_date" name="plan_start_date">
+                            <input type="date" name="plan_date">
                             <select name="plan_start_hour" id="plan_start_hour">
                                 @for ($i = 0; $i <= 23; $i++)
                                     @php $planStartHour = str_pad($i, 2, 0, STR_PAD_LEFT); @endphp
@@ -111,7 +111,7 @@
                         </td>
                     </tr>
                 </table>
-                @error('plan_start_date')
+                @error('plan_date')
                     <div class="text-red-500">{{ $message }}</div>
                 @enderror
                 @error('plan_start_hour')
