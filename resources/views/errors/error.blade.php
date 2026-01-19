@@ -6,7 +6,7 @@
 </head>
 
 <body class="min-h-screen bg-amber-50">
-    <div class="mx-auto max-w-7xl text-center">
+    <div class="mx-auto max-w-7xl text-center pt-50">
         <div class="p-10 my-10 bg-white text-base sm:text-2xl font-serif text-gray-800">
             <p class="mb-3">予期しないエラーです。</p>
             <p>現在、問題が発生しています。</p>
