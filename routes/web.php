@@ -37,3 +37,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('overtime_sheets', OvertimeSheetController::class);
 
 });
+
+Route::get('error', [App\Http\Controllers\ErrorController::class, 'error'])->name('error');
