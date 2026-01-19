@@ -8,6 +8,9 @@ use App\Models\OvertimeSheet;
 use App\Models\WorkPattern;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Log;
 
 class OvertimeSheetController extends Controller
 {
@@ -46,7 +49,7 @@ class OvertimeSheetController extends Controller
             'plan_end_hour' => 'required|numeric|min:0|max:23',
             'plan_end_minute' => 'required|numeric|min:0|max:59',
             'cause' => 'required|string|max:200',
-        ],[
+        ], [
             'division.required' => '部署は必須です。',
             'work_pattern.required' => '勤務パターンは必須です。',
             'plan_date.required' => '予定開始日は必須です。',
@@ -67,23 +70,48 @@ class OvertimeSheetController extends Controller
             'cause.max' => '残業理由は200文字以内で入力してください。',
         ]);
 
-        $overtimeSheet = OvertimeSheet::create([
-            'user_id' => Auth::id(),
-            'division_id' => $validated['division'],
-            'submit_status' => 0
-        ]);
 
-        $overtimeSheet->overtimeRequest()->create([
-            'work_pattern_id' => $validated['work_pattern'],
-            'plan_start_at' => $validated['plan_date'] . ' ' . sprintf('%02d:%02d:00', $validated['plan_start_hour'], $validated['plan_start_minute']),
-            'plan_end_at' => $validated['plan_date'] . ' ' . sprintf('%02d:%02d:00', $validated['plan_end_hour'], $validated['plan_end_minute']),
-            //sprintfは文字連結関数　※第一引数をformatとして%と指定の記号に埋め込む。%02dは「0(0)が2桁(2)かつ10進数(d)の型」ここに第二引数、第三引数を順に埋め込む
-            //timestamp 1970-01-01 00:00:01 UTC～2038-01-19 03:14:07 UTC
-            //datetime 1000-01-01 00:00:00～9999-12-31 23:59:59
-            'cause' => $validated['cause'],
-            'application_status' => 0 //0=未申請、1=申請、2=承認依頼、3=承認済み
-        ]);
-        
+        try {
+
+            DB::transaction(function ()  use ($validated) {
+                // データベースの操作
+
+                throw new \Exception('テスト用の例外です。');
+
+                $overtimeSheet = OvertimeSheet::create([
+
+                    'user_id' => Auth::id(),
+                    'division_id' => $validated['division'],
+                    'submit_status' => 0
+                ]);
+
+                $overtimeSheet->overtimeRequest()->create([
+
+                    'work_pattern_id' => $validated['work_pattern'],
+                    'plan_start_at' => $validated['plan_date'] . ' ' . sprintf('%02d:%02d:00', $validated['plan_start_hour'], $validated['plan_start_minute']),
+                    'plan_end_at' => $validated['plan_date'] . ' ' . sprintf('%02d:%02d:00', $validated['plan_end_hour'], $validated['plan_end_minute']),
+                    //sprintfは文字連結関数　※第一引数をformatとして%と指定の記号に埋め込む。%02dは「0(0)が2桁(2)かつ10進数(d)の型」ここに第二引数、第三引数を順に埋め込む
+                    //timestamp 1970-01-01 00:00:01 UTC～2038-01-19 03:14:07 UTC
+                    //datetime 1000-01-01 00:00:00～9999-12-31 23:59:59
+                    'cause' => $validated['cause'],
+                    'application_status' => 0 //0=未申請、1=申請、2=承認依頼、3=承認済み
+                ]);
+
+            });
+        } catch (QueryException $e) {
+            // データベースクエリ関連のエラーハンドリング
+
+            Log::error($e->getMessage(), ['exception' => $e, 'エラーメッセージ' => 'SQLエラーが発生しました。']);
+            return redirect()->route('error');
+        } catch (\Exception $e) {
+            // 一般的なエラーハンドリング
+
+            Log::error($e->getMessage(), ['exception' => $e, 'エラーメッセージ' => '予期せぬエラーが発生しました。']);
+            return redirect()->route('error');
+        }
+
+
+
         //トランザクション処理にする
         return view('overtime_sheets.index');
     }
