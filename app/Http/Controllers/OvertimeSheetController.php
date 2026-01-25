@@ -110,10 +110,7 @@ class OvertimeSheetController extends Controller
             return redirect()->route('error');
         }
 
-
-
-        //トランザクション処理にする
-        return view('overtime_sheets.index');
+        return redirect()->route('overtime_sheets.index');
     }
 
     /**
