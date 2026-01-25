@@ -1,7 +1,7 @@
 <x-layouts.app.header>
 
     <body>
-        <div class="container w-6/11 mx-auto">
+        <div class="container w-8/11 mx-auto">
             <!-- 残業申請一覧タイトル -->
             <div class="text-center mt-6">
                 <h1>残業申請一覧</h1>
@@ -38,21 +38,28 @@
                     <th class="border border-black p-1">提出状況</th>
                     <th></th>
                 </tr>
-                <tr>
-                    <td class="border border-black p-1"></td>
-                    <td class="border border-black p-1"></td>
-                    <td class="border border-black p-1"></td>
-                    <td class="border border-black p-1"></td>
-                    <td class="border border-black p-1"></td>
-                    <td class="border border-black p-1"><x-ui.a-button message="詳細" href="#" class="bg-blue-600 hover:bg-blue-700 p-1 text-sm" /></td>
-                    {{-- {{ route('overtime_sheets.show', $overtimeSheet) }} --}}
-                    <td class="border border-black p-1"></td>
-                    <td><x-ui.button message="削除" class="bg-red-500 hover:bg-red-600 px-2 py-1 text-sm" /></td>
-                </tr>
+                @foreach ($overtimeSheets as $overtimeSheet)
+                    <tr>
+                        <td class="border border-black p-1">{{ $overtimeSheet->overtimeRequest->plan_start_at }}</td>
+                        <td class="border border-black p-1">{{ $overtimeSheet->overtimeRequest->application_status }}</td>
+                        <td class="border border-black p-1">{{ $overtimeSheet->overtimeRequest->workPattern->name }}</td>
+                        <td class="border border-black p-1">{{ $overtimeSheet->overtimeRequest->plan_start_at }}～{{ $overtimeSheet->overtimeRequest->plan_end_at }}</td>
+                        <td class="border border-black p-1">
+                            @isset($overtimeSheet->overtimeReport)
+                                {{ $overtimeSheet->overtimeReport->rest_hours }}時間{{ $overtimeSheet->overtimeReport->rest_minutes }}分 
+                            @endisset
+                        </td>
+                        <td class="border border-black p-1"><x-ui.a-button message="詳細" href="#" class="bg-blue-600 hover:bg-blue-700 p-1 text-sm" /></td>
+                        {{-- {{ route('overtime_sheets.show', $overtimeSheet) }} --}}
+                        <td class="border border-black p-1">{{$overtimeSheet->submit_status}}</td>
+                        <td><x-ui.button message="削除" class="bg-red-500 hover:bg-red-600 px-2 py-1 text-sm" /></td>
+                    </tr>
+                @endforeach
             </table>
 
             <div class="text-left mt-3">
-                <x-ui.a-button message="登録する" href="{{ route('overtime_sheets.create') }}" class="bg-sky-300 hover:bg-sky-500 py-2 px-4" />
+                <x-ui.a-button message="登録する" href="{{ route('overtime_sheets.create') }}"
+                    class="bg-sky-300 hover:bg-sky-500 py-2 px-4" />
             </div>
 
             <!-- 月次処理ボタン -->
