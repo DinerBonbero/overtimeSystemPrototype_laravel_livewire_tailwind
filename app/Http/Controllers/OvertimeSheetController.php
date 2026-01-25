@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Division;
 use App\Models\OvertimeSheet;
+use App\Models\OvertimeRequest;
+use App\Models\OvertimeReport;
 use App\Models\WorkPattern;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -20,7 +22,9 @@ class OvertimeSheetController extends Controller
     public function index()
     {
 
-        return view('overtime_sheets.index');
+        $overtimeSheets = Auth::user()->overtimeSheets()->with('overtimeRequest.workPattern')->with('overtimeReport')->get();
+
+        return view('overtime_sheets.index', compact('overtimeSheets'));
     }
 
     /**
