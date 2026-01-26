@@ -41,7 +41,17 @@
                 @foreach ($overtimeSheets as $overtimeSheet)
                     <tr>
                         <td class="border border-black p-1">{{ $overtimeSheet->overtimeRequest->plan_start_at }}</td>
-                        <td class="border border-black p-1">{{ $overtimeSheet->overtimeRequest->application_status }}</td>
+                        @if ($overtimeSheet->overtimeRequest->application_status === 0)
+                            <td class="border border-black p-1">未申請</td>
+                        @elseif ($overtimeSheet->overtimeRequest->application_status === 1)
+                            <td class="border border-black p-1">申請</td>
+                        @elseif ($overtimeSheet->overtimeRequest->application_status === 2)
+                            <td class="border border-black p-1">承認依頼</td>
+                        @elseif ($overtimeSheet->overtimeRequest->application_status === 3)
+                            <td class="border border-black p-1 blue-500">承認済み</td>
+                        @else
+                            <td class="border border-black p-1"></td>
+                        @endif
                         <td class="border border-black p-1">{{ $overtimeSheet->overtimeRequest->workPattern->name }}</td>
                         <td class="border border-black p-1">{{ $overtimeSheet->overtimeRequest->plan_start_at }}～{{ $overtimeSheet->overtimeRequest->plan_end_at }}</td>
                         <td class="border border-black p-1">
@@ -51,7 +61,11 @@
                         </td>
                         <td class="border border-black p-1"><x-ui.a-button message="詳細" href="#" class="bg-blue-600 hover:bg-blue-700 p-1 text-sm" /></td>
                         {{-- {{ route('overtime_sheets.show', $overtimeSheet) }} --}}
-                        <td class="border border-black p-1">{{$overtimeSheet->submit_status}}</td>
+                        @if ($overtimeSheet->submit_status === 0)
+                            <td class="border border-black p-1">未提出</td>
+                        @elseif ($overtimeSheet->submit_status === 1)
+                            <td class="border border-black p-1">提出</td>
+                        @endif
                         <td><x-ui.button message="削除" class="bg-red-500 hover:bg-red-600 px-2 py-1 text-sm" /></td>
                     </tr>
                 @endforeach
