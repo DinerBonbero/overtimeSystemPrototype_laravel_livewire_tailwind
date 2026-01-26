@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('overtime_requests', function (Blueprint $table) {
-            $table->unsignedTinyInteger('submit_status')->default(0)->after('approved_at');//0:未申請 1:申請 2:承認依頼 3:承認
+            $table->unsignedTinyInteger('application_status')->default(0)->after('approved_at');//0:未申請 1:申請 2:承認依頼 3:承認
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('overtime_requests', function (Blueprint $table) {
-            $table->dropColumn('submit_status');
+            $table->dropColumn('application_status');
         });
     }
 };
