@@ -42,13 +42,13 @@
                     <tr>
                         <td class="border border-black p-1">{{ $overtimeSheet->overtimeRequest->plan_start_at }}</td>
                         @if ($overtimeSheet->overtimeRequest->application_status === 0)
-                            <td class="border border-black p-1 red-300">未申請</td>
+                            <td class="border border-black p-1 text-red-300">未申請</td>
                         @elseif ($overtimeSheet->overtimeRequest->application_status === 1)
                             <td class="border border-black p-1">申請</td>
                         @elseif ($overtimeSheet->overtimeRequest->application_status === 2)
                             <td class="border border-black p-1">承認依頼</td>
                         @elseif ($overtimeSheet->overtimeRequest->application_status === 3)
-                            <td class="border border-black p-1 blue-500">承認済み</td>
+                            <td class="border border-black p-1 text-blue-500">承認済み</td>
                         @else
                             <td class="border border-black p-1"></td>
                         @endif
@@ -62,7 +62,7 @@
                         <td class="border border-black p-1"><x-ui.a-button message="詳細" href="#" class="bg-blue-600 hover:bg-blue-700 p-1 text-sm" /></td>
                         {{-- {{ route('overtime_sheets.show', $overtimeSheet) }} --}}
                         @if ($overtimeSheet->submit_status === 0)
-                            <td class="border border-black p-1 red-300">未提出</td>
+                            <td class="border border-black p-1 text-red-300">未提出</td>
                         @elseif ($overtimeSheet->submit_status === 1)
                             <td class="border border-black p-1">提出</td>
                         @endif
