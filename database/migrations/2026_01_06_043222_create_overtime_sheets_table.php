@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('division_id')->constrained();
-            $table->tinyInteger('submit_status')->default(0);
+            $table->tinyInteger('submit_status')->default(0);//0:未提出 1:提出
             $table->dateTime('submitted_at')->nullable();
             $table->timestamps();
         });
