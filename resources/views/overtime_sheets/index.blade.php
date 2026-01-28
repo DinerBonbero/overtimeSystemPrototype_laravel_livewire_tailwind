@@ -22,11 +22,11 @@
                     <x-ui.button message="検索" class="bg-blue-600 hover:bg-blue-700 text-sm py-1 px-2" />
                 </div>
             </div>
-            <div class="text-left">
-                <span></span>
+            <div class="text-left my-2">
+                <span>&nbsp;&nbsp;{{ Auth::user()->name }}</span>
             </div>
             <!-- 一覧テーブル -->
-            <table class="m-auto mt-6 border-collapse w-full text-center">
+            <table class="m-auto border-collapse w-full text-center">
 
                 <tr>
                     <th class="border border-black p-1">日付</th>
