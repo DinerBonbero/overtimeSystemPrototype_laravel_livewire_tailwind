@@ -16,6 +16,8 @@ class UserFactory extends Factory
      */
     protected static ?string $password;
 
+    private static int $sequence = 10;//後のstr_padで返り値が文字列になるためint型で定義、別状なし
+
     /**
      * Define the model's default state.
      *
@@ -33,6 +35,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
+            'employee_number' => str_pad(self::$sequence++, 4, '0', STR_PAD_LEFT),//返り値は文字列のため、マイグレーションのカラム型と一致する。selfはstaticで定義したこのクラス自身を指す。※https://kyotoprogramminglab.hatenablog.com/entry/archives/524
             // 'two_factor_secret' => Str::random(10),
             // 'two_factor_recovery_codes' => Str::random(10),
             // 'two_factor_confirmed_at' => now(),
