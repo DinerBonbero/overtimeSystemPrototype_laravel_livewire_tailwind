@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('employee_number')->unique()->after('role_id')->nullable(); //社員番号カラムの追加
+            $table->string('employee_number')->unique()->after('role_id')->nullable(); //社員番号カラムの追加、本番時はnullable()を外す
         });
     }
 
