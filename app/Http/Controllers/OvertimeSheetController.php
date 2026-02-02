@@ -120,9 +120,12 @@ class OvertimeSheetController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(OvertimeSheet $overtimeSheet)
     {
-        //
+        
+        $overtimeSheet = Auth::user()->overtimeSheets()->with('overtimeRequest.workPattern')->with('overtimeReport')->where('id', $overtimeSheet->id)->first();
+
+        return view('overtime_sheets.show', compact('overtimeSheet'));
     }
 
     /**
