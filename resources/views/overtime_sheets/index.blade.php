@@ -59,7 +59,7 @@
                                 {{ $overtimeSheet->overtimeReport->rest_hours }}時間{{ $overtimeSheet->overtimeReport->rest_minutes }}分 
                             @endisset
                         </td>
-                        <td class="border border-black p-1"><x-ui.a-button message="詳細" href="#" class="bg-blue-600 hover:bg-blue-700 p-1 text-sm" /></td>
+                        <td class="border border-black p-1"><x-ui.a-button message="詳細" href="{{ route('overtime_sheets.show', $overtimeSheet) }}" class="bg-blue-600 hover:bg-blue-700 p-1 text-sm" /></td>
                         {{-- {{ route('overtime_sheets.show', $overtimeSheet) }} --}}
                         @if ($overtimeSheet->submit_status === 0)
                             <td class="border border-black p-1 text-red-300">未提出</td>
