@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="text-left my-2">
-                <span>{{ Auth::user()->employee_number }}&nbsp;&nbsp;{{ Auth::user()->name }}</span>
+                <span>社員番号：{{ Auth::user()->employee_number }} &nbsp;&nbsp;&nbsp;&nbsp; 社員名：{{ Auth::user()->name }}</span>
             </div>
             <!-- 一覧テーブル -->
             <table class="m-auto border-collapse w-full text-center">
