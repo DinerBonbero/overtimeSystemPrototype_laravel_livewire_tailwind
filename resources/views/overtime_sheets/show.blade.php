@@ -14,14 +14,7 @@
                             <tr class="border border-black w-full">
                                 <td class="py-1 pl-2 pr-4 text-center"><label for="division">部署名</label></td>
                                 <td class="pr-2 py-1">
-                                    <select name="division" id="division" class="px-3 w-full">
-                                        <option value="">選択してください</option>
-                                        @foreach ($divisions as $key => $division)
-                                            <option value="{{ $key }}"
-                                                @if (old('division') == $key) selected @endif>{{ $division }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                    {{ $overtimeSheet->division->name }}
                                 </td>
                             </tr>
                         </table>
@@ -29,9 +22,13 @@
                     <div class="col-end-8 col-span-3">
                         <table class="border-collapse ml-auto">
                             <tr class="border border-black w-full">
+                                <td>社員番号</td>
+                                <td class="pr-2 py-1">
+                                    {{ Auth::user()->employee_number }}
+                                </td>
                                 <td class="py-1 pl-2 pr-4 text-center"><label for="name">名前</label></td>
                                 <td class="pr-2 py-1">
-                                    {{ $user->name }}
+                                    {{ Auth::user()->name }}
                                 </td>
                             </tr>
                         </table>
@@ -41,18 +38,10 @@
                     <tr>
                         <td class="border border-black px-2 py-1 w-1/4">勤務パターン</td>
                         <td class="border border-black px-2 py-1 w-3/4 text-center">
-                            <select name="work_pattern" id="work_pattern" class="px-10">
-                                <option value="" class="text-center">選択してください</option>
-                                @foreach ($workPatterns as $workPattern)
-                                    <option value="{{ $workPattern->id }}"
-                                        @if (old('work_pattern') == $workPattern->id) selected @endif>
-                                        {{ $workPattern->name }}
-                                        &nbsp;&nbsp;|&nbsp;&nbsp;
-                                        {{-- ノーブレイクスペースブラウザに消されないスペース --}}
-                                        {{ $workPattern->start_time }} ～ {{ $workPattern->end_time }}
-                                    </option>
-                                @endforeach
-                            </select>
+                            {{ $overtimeSheet->overtimeRequest->workPattern->name }}
+                            &nbsp;&nbsp;|&nbsp;&nbsp;
+                            {{-- ノーブレイクスペースブラウザに消されないスペース --}}
+                            {{ $overtimeSheet->overtimeRequest->workPattern->start_time }} ～ {{ $overtimeSheet->overtimeRequest->workPattern->end_time }}
                         </td>
                     </tr>
                 </table>
