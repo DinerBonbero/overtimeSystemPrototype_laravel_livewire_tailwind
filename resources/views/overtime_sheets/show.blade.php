@@ -22,7 +22,7 @@
                     <div class="col-end-8 col-span-3">
                         <table class="border-collapse ml-auto">
                             <tr class="border border-black w-full">
-                                <td>社員番号</td>
+                                <td class="pl-2 pr-4">社員番号</td>
                                 <td class="pr-2 py-1">
                                     {{ Auth::user()->employee_number }}
                                 </td>
@@ -97,6 +97,23 @@
                     <tr>
                         <td class="border border-black px-2 py-1">
                             <textarea name="cause" id="cause" class="w-full">{{ old('cause') }}</textarea>
+                        </td>
+                    </tr>
+                </table>
+                <table class="mt-6 border-collapse w-full text-center">
+                    <tr>
+                        <td class="border border-black px-2 py-1">
+                            <span>上記の残業を命令します</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="border border-black px-2 py-1">
+                            年
+                            月
+                            日
+                        </td>
+                        <td class="border border-black px-2 py-1">
+                            承認者
                         </td>
                     </tr>
                 </table>
