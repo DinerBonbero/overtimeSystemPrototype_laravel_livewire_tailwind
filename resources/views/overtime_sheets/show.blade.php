@@ -108,12 +108,11 @@
                     </tr>
                     <tr>
                         <td class="border border-black px-2 py-1">
-                            年
-                            月
-                            日
-                        </td>
-                        <td class="border border-black px-2 py-1">
-                            承認者
+                            
+                            <span>年月日</span>
+
+                            <span>承認者</span>
+                            
                             <span>※保留</span>
                         </td>
                     </tr>
