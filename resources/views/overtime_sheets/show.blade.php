@@ -114,6 +114,7 @@
                         </td>
                         <td class="border border-black px-2 py-1">
                             承認者
+                            <span>※保留</span>
                         </td>
                     </tr>
                 </table>
