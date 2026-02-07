@@ -125,6 +125,7 @@ class OvertimeSheetController extends Controller
         
         $overtimeSheet->load('overtimeRequest.workPattern', 'overtimeReport');//$overtimeSheetはクエリビルダではないため、withは使えない eagerロードのloadメソッドを使用する
         // $overtimeSheet = Auth::user()->overtimeSheets()->with('overtimeRequest.workPattern')->with('overtimeReport')->where('id', $overtimeSheet->id)->first();
+        // 上記コメントのコードでは、リソースコントローラが持つshowメソッドの理想とした使い方に反している。既にモデルバインディングで取れてる為、再取得する必要性がないため
 
         return view('overtime_sheets.show', compact('overtimeSheet'));
     }
