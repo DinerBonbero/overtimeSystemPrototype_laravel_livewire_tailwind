@@ -21,7 +21,8 @@ class OvertimeSheetPolicy
      */
     public function view(User $user, OvertimeSheet $overtimeSheet): bool //showで使用
     {
-        return false;
+        
+        return $user->id === $overtimeSheet->user_id;
     }
 
     /**
