@@ -122,7 +122,8 @@ class OvertimeSheetController extends Controller
      */
     public function show(OvertimeSheet $overtimeSheet)
     {
-        
+        $this->authorize('view', $overtimeSheet);
+
         $overtimeSheet->load('overtimeRequest.workPattern', 'overtimeReport');//$overtimeSheetはクエリビルダではないため、withや->where('user_id', Auth::id())は使えないeagerロードのloadメソッドを使用する
         // $overtimeSheet = Auth::user()->overtimeSheets()->with('overtimeRequest.workPattern')->with('overtimeReport')->where('id', $overtimeSheet->id)->first();
         // 上記コメントのコードでは、リソースコントローラが持つshowメソッドの理想とした使い方に反している。既にモデルバインディングで取れてる為、再取得する必要性がないため
