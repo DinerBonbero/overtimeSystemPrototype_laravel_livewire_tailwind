@@ -13,6 +13,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Gate;
 
 class OvertimeSheetController extends Controller
 {
@@ -122,7 +123,7 @@ class OvertimeSheetController extends Controller
      */
     public function show(OvertimeSheet $overtimeSheet)
     {
-        $this->authorize('view', $overtimeSheet);
+        Gate::authorize('view', $overtimeSheet);//ポリシーのviewメソッドを使用して認可を確認
 
         $overtimeSheet->load('overtimeRequest.workPattern', 'overtimeReport');//$overtimeSheetはクエリビルダではないため、withや->where('user_id', Auth::id())は使えないeagerロードのloadメソッドを使用する
         // $overtimeSheet = Auth::user()->overtimeSheets()->with('overtimeRequest.workPattern')->with('overtimeReport')->where('id', $overtimeSheet->id)->first();
