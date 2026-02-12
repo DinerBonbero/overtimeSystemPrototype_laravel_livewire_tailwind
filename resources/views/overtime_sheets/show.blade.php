@@ -120,7 +120,13 @@
             </table>
             <!-- 残業申登録録ボタン -->
             <div class="text-center mt-6">
-                <x-ui.button message="登録する" class="bg-blue-600 hover:bg-blue-700 py-1 px-2" />
+                <x-ui.button message="編集する" class="bg-blue-600 hover:bg-blue-700 py-1 px-2" />
+            </div>
+            <div class="text-center mt-6">
+                <x-ui.button message="申請する" class="bg-blue-600 hover:bg-blue-700 py-1 px-2" />
+            </div>
+            <div class="text-center mt-6">
+                <x-ui.button message="再申請を依頼する" class="bg-blue-600 hover:bg-blue-700 py-1 px-2" />
             </div>
 
             <div class="text-center mt-6 text-2xl">
@@ -201,7 +207,13 @@
             </table>
             <!-- 残業報告登録ボタン -->
             <div class="text-center mt-6">
-                <x-ui.button message="登録する" class="bg-blue-600 hover:bg-blue-700 py-1 px-2" />
+                <x-ui.button message="編集する" class="bg-blue-600 hover:bg-blue-700 py-1 px-2" />
+            </div>
+            <div class="text-center mt-6">
+                <x-ui.button message="未提出にする" class="bg-blue-600 hover:bg-blue-700 py-1 px-2" />
+            </div>
+            <div class="text-center mt-6">
+                <x-ui.button message="印刷" class="bg-blue-600 hover:bg-blue-700 py-1 px-2" />
             </div>
         </div>
     </body>
