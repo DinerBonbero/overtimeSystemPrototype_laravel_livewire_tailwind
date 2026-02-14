@@ -14,8 +14,8 @@ class WorkPattern extends Model
     protected function casts(): array //キャスト
     {
         return [
-            'start_time' => 'datetime:H:i:s',//時間だけを保存するため、H:i:sでキャスト
-            'end_time' => 'datetime:H:i:s',//時間だけを保存するため、H:i:sでキャスト
+            'start_time' => 'datetime:H:i:s',//bladeでformat('H:i')するため
+            'end_time' => 'datetime:H:i:s',//bladeでformat('H:i')するため
         ];
     }
 
