@@ -9,7 +9,7 @@ use Laravel\Fortify\Features;
 use App\Http\Controllers\OvertimeSheetController;
 
 Route::get('/', function () {
-    redirect()->route('overtime_sheets.index');//ホーム画面を勤怠一覧に変更
+    return redirect()->route('overtime_sheets.index');//ホーム画面を勤怠一覧に変更
 })->name('home');
 
 Route::view('dashboard', 'dashboard')
