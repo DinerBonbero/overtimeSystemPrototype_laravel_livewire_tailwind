@@ -15,6 +15,14 @@ class OvertimeRequest extends Model
         'id'
     ];
 
+    public function casts(): array //キャスト
+    {
+        return [
+            'plan_start_at' => 'datetime',//bladeでformat('Y年m月d日 H時i分')するため
+            'plan_end_at' => 'datetime',//bladeでformat('Y年m月d日 H時i分')するため
+        ];
+    }
+
     public function overtimeSheet(): BelongsTo
     {
         return $this->belongsTo(OvertimeSheet::class);
