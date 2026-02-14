@@ -38,8 +38,11 @@
                         {{ $overtimeSheet->overtimeRequest->workPattern->name }}
                         &nbsp;&nbsp;|&nbsp;&nbsp;
                         {{-- ノーブレイクスペースブラウザに消されないスペース --}}
-                        {{ $overtimeSheet->overtimeRequest->workPattern->start_time }} ～
-                        {{ $overtimeSheet->overtimeRequest->workPattern->end_time }}
+                        {{ $overtimeSheet->overtimeRequest->workPattern->start_time->format('H:i') }} ～
+                        {{ $overtimeSheet->overtimeRequest->workPattern->end_time->format('H:i') }}
+
+                        {{-- 
+                        ->format('Y-m-d') --}}
                     </td>
                 </tr>
             </table>
@@ -47,7 +50,9 @@
                 <tr>
                     <td class="border border-black px-2 py-1 w-1/4">残業予定時間</td>
                     <td class="border border-black px-2 py-1 w-3/4">
+                        {{ $overtimeSheet->overtimeRequest->plan_start_at }}
                         年 月 日 時 分 ～ 年 月 日 時 分
+                        {{ $overtimeSheet->overtimeRequest->plan_end_at }}
                     </td>
                 </tr>
             </table>
@@ -71,14 +76,14 @@
                 </tr>
                 <tr class="border border-black">
                     <td class="px-2 py-1 grid grid-cols-9">
-                        <span class="col-start-1">年月日{{ $overtimeSheet->approved_at }}</span>
-                        <span class="col-end-7">承認者</span>
-                        {{-- $overtimeSheet->overtimeRequest->user->name --}}
+                        <span class="col-start-1">年月日{{ $overtimeSheet->overtimeRequest->approved_at ?? '' }}</span>
+                        <span class="col-end-7">承認者{{ $overtimeSheet->overtimeRequest->user->name ?? '' }}</span>
+                        
                     </td>
                 </tr>
             </table>
             <!-- 残業申登録録ボタン -->
-            <div class="mt-6 flex justify-center gap-2">
+            <div class="mt-6 flex justify-center gap-3">
                 <x-ui.button message="編集する" class="bg-blue-600 hover:bg-blue-700 py-1 px-2"/>
                 <x-ui.button message="申請する" class="bg-blue-600 hover:bg-blue-700 py-1 px-2"/>
                 <x-ui.button message="再申請を依頼する" class="bg-blue-600 hover:bg-blue-700 py-1 px-2"/>
@@ -112,7 +117,7 @@
                 </tr>
                 <tr>
                     <td class="border border-black px-2 py-1">
-                        <textarea name="cause" id="cause" class="w-full">{{ old('cause') }}</textarea>
+                        {{ $overtimeSheet->overtimeReport->report ?? '' }}
                     </td>
                 </tr>
             </table>
@@ -122,18 +127,18 @@
                         <span>上記の残業を報告します</span>
                     </td>
                 </tr>
-                <tr>
-                    <td class="border border-black px-2 py-1">
-                        <span>年月日</span>
-                        <span>申請者</span>
+                <tr class="border border-black">
+                    <td class="px-2 py-1 grid grid-cols-9">
+                        <span class="col-start-1 col-span-3">年月日{{ $overtimeSheet->overtimeReport->approved_at ?? '' }}</span>
+                        <span class="col-start-6 col-span-3">申請者：{{ $overtimeSheet->user->name ?? '' }}</span>
                     </td>
                 </tr>
             </table>
             <!-- 残業報告登録ボタン -->
-            <div class="text-center mt-6">
+            <div class="text-center my-6 flex justify-center gap-3">
                 <x-ui.button message="編集する" class="bg-blue-600 hover:bg-blue-700 py-1 px-2" />
                 <x-ui.button message="未提出にする" class="bg-blue-600 hover:bg-blue-700 py-1 px-2" />
-                <x-ui.button message="印刷" class="bg-blue-600 hover:bg-blue-700 py-1 px-2" />
+                <x-ui.button message="印刷" class="bg-blue-600 hover:bg-blue-700 py-1 px-1 ml-10" />
             </div>
         </div>
     </body>
