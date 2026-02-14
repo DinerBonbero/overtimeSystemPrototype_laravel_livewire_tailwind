@@ -40,9 +40,6 @@
                         {{-- ノーブレイクスペースブラウザに消されないスペース --}}
                         {{ $overtimeSheet->overtimeRequest->workPattern->start_time->format('H:i') }} ～
                         {{ $overtimeSheet->overtimeRequest->workPattern->end_time->format('H:i') }}
-
-                        {{-- 
-                        ->format('Y-m-d') --}}
                     </td>
                 </tr>
             </table>
@@ -50,9 +47,9 @@
                 <tr>
                     <td class="border border-black px-2 py-1 w-1/4">残業予定時間</td>
                     <td class="border border-black px-2 py-1 w-3/4">
-                        {{ $overtimeSheet->overtimeRequest->plan_start_at }}
-                        年 月 日 時 分 ～ 年 月 日 時 分
-                        {{ $overtimeSheet->overtimeRequest->plan_end_at }}
+                        {{ $overtimeSheet->overtimeRequest->plan_start_at->format('Y年m月d日 H時i分') }}
+                        ～
+                        {{ $overtimeSheet->overtimeRequest->plan_end_at->format('Y年m月d日 H時i分') }}
                     </td>
                 </tr>
             </table>
