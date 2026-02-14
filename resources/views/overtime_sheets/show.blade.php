@@ -12,9 +12,8 @@
                 <div class="col-start-1 col-span-3">
                     <table class="border-collapse">
                         <tr class="border border-black w-full">
-                            <td class="py-1 pl-2 pr-4 text-center"><label for="division">部署名</label></td>
-                            <td class="pr-2 py-1">
-                                {{ $overtimeSheet->division->name }}
+                            <td class="py-1 px-2 border border-black text-center">
+                                部署名：{{ $overtimeSheet->division->name }}
                             </td>
                         </tr>
                     </table>
@@ -22,13 +21,11 @@
                 <div class="col-end-8 col-span-3">
                     <table class="border-collapse ml-auto">
                         <tr class="border border-black w-full">
-                            <td class="pl-2 pr-4">社員番号</td>
-                            <td class="pr-2 py-1">
-                                {{ Auth::user()->employee_number }}
+                            <td class="py-1 px-2 border border-black">
+                                社員番号：{{ Auth::user()->employee_number }}
                             </td>
-                            <td class="py-1 pl-2 pr-4 text-center"><label for="name">名前</label></td>
-                            <td class="pr-2 py-1">
-                                {{ Auth::user()->name }}
+                            <td class="py-1 px-2 text-center">
+                                名前：{{ Auth::user()->name }}
                             </td>
                         </tr>
                     </table>
@@ -61,8 +58,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="border border-black px-2 py-1">
-                        <textarea name="cause" id="cause" class="w-full">{{ old('cause') }}</textarea>
+                    <td class="border border-black px-3 py-1">
+                        {{ $overtimeSheet->overtimeRequest->cause }}
                     </td>
                 </tr>
             </table>
@@ -72,22 +69,19 @@
                         <span>上記の残業を命令します</span>
                     </td>
                 </tr>
-                <tr>
-                    <td class="border border-black px-2 py-1">
-
-                        <span>年月日</span>
-
-                        <span>承認者</span>
-
-                        <span>※保留</span>
+                <tr class="border border-black">
+                    <td class="px-2 py-1 grid grid-cols-9">
+                        <span class="col-start-1">年月日{{ $overtimeSheet->approved_at }}</span>
+                        <span class="col-end-7">承認者</span>
+                        {{-- $overtimeSheet->overtimeRequest->user->name --}}
                     </td>
                 </tr>
             </table>
             <!-- 残業申登録録ボタン -->
-            <div class="text-center mt-6">
-                <x-ui.button message="編集する" class="bg-blue-600 hover:bg-blue-700 py-1 px-2" />
-                <x-ui.button message="申請する" class="bg-blue-600 hover:bg-blue-700 py-1 px-2" />
-                <x-ui.button message="再申請を依頼する" class="bg-blue-600 hover:bg-blue-700 py-1 px-2" />
+            <div class="mt-6 flex justify-center gap-2">
+                <x-ui.button message="編集する" class="bg-blue-600 hover:bg-blue-700 py-1 px-2"/>
+                <x-ui.button message="申請する" class="bg-blue-600 hover:bg-blue-700 py-1 px-2"/>
+                <x-ui.button message="再申請を依頼する" class="bg-blue-600 hover:bg-blue-700 py-1 px-2"/>
             </div>
 
             <div class="text-center mt-6 text-2xl">
