@@ -18,8 +18,8 @@ class OvertimeRequest extends Model
     public function casts(): array //キャスト
     {
         return [
-            'plan_start_at' => 'datetime',//bladeでformat('Y年m月d日 H時i分')するため
-            'plan_end_at' => 'datetime',//bladeでformat('Y年m月d日 H時i分')するため
+            'plan_start_at' => 'datetime', //bladeでformat('Y年m月d日 H時i分')するため
+            'plan_end_at' => 'datetime', //bladeでformat('Y年m月d日 H時i分')するため
         ];
     }
 
@@ -37,5 +37,9 @@ class OvertimeRequest extends Model
     {
         return $this->belongsTo(Role::class);
     }
-    
+
+    public function approver()
+    {
+        return $this->belongsTo(User::class, 'approver_id', 'id');
+    }
 }

@@ -76,4 +76,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Division::class);
     }
+
+    public function overtimeRequestToApprover()
+    {
+        return $this->hasMany(OvertimeRequest::class, 'approver_id', 'id');
+    }
 }
