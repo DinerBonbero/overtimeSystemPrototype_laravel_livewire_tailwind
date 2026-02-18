@@ -81,7 +81,10 @@
             </table>
             <!-- 残業申登録録ボタン -->
             <div class="mt-6 flex justify-center gap-3">
-                <x-ui.button message="編集する" class="bg-blue-600 hover:bg-blue-700 py-1 px-2"/>
+                <form action="{{ route('overtime_sheets.edit', $overtimeSheet->overtimeRequest->id) }}" method="get">
+                    @csrf
+                    <x-ui.button message="編集する" class="bg-green-600 hover:bg-green-700 py-1 px-2"/>
+                </form>
                 <x-ui.button message="申請する" class="bg-blue-600 hover:bg-blue-700 py-1 px-2"/>
                 <x-ui.button message="再申請を依頼する" class="bg-blue-600 hover:bg-blue-700 py-1 px-2"/>
             </div>
