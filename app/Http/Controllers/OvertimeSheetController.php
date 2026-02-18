@@ -137,7 +137,15 @@ class OvertimeSheetController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // $overtimeRequest = OvertimeRequest::findOrFail($id);
+        // $overtimeSheet = $overtimeRequest->overtimeSheet;
+
+        // Gate::authorize('update', $overtimeSheet);//ポリシーのupdateメソッドを使用して認可を確認
+
+        // $divisions = Division::pluck('name', 'id');
+        // $workPatterns = WorkPattern::select('id', 'name', 'start_time', 'end_time')->get();
+
+        // return view('overtime_sheets.edit', compact('overtimeSheet', 'divisions', 'workPatterns'));
     }
 
     /**
