@@ -145,7 +145,7 @@ class OvertimeSheetController extends Controller
         // $divisions = Division::pluck('name', 'id');
         // $workPatterns = WorkPattern::select('id', 'name', 'start_time', 'end_time')->get();
 
-        // return view('overtime_sheets.edit', compact('overtimeSheet', 'divisions', 'workPatterns'));
+        return view('overtime_sheets.edit'); //, compact('overtimeSheet', 'divisions', 'workPatterns')
     }
 
     /**
