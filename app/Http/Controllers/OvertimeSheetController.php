@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class OvertimeSheetController extends Controller
 {
@@ -145,7 +147,20 @@ class OvertimeSheetController extends Controller
 
             $overtimeSheet->load('overtimeRequest.workPattern'); //リレーション先のデータも取得
 
+        } catch (ModelNotFoundException $e) {//\Exception
+            //findOrFail($id)が取得できないとき、404エラーを投げるため、ModelNotFoundExceptionをキャッチしてエラーハンドリングする
+
+            Log::error($e->getMessage(), ['exception' => $e, 'エラーメッセージ' => 'OvertimeSheet::findOrFail($id)にてエラーが発生しました。']);
+            
+            return redirect()->route('error');
+        } catch (AuthorizationException $e) {
+            //Gate::authorize()認可できないとき、エラーを投げるため、AuthorizationExceptionをキャッチしてエラーハンドリングする
+
+            Log::error($e->getMessage(), ['exception' => $e, 'エラーメッセージ' => 'Gate::authorize()にて認可エラーが発生しました。']);
+            
+            return redirect()->route('error');
         } catch (\Exception $e) {
+            //一般的なエラーハンドリング
 
             Log::error($e->getMessage(), ['exception' => $e, 'エラーメッセージ' => '予期せぬエラーが発生しました。']);
             
