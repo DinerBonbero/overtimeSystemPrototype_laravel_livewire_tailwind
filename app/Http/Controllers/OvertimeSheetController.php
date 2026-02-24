@@ -101,7 +101,6 @@ class OvertimeSheetController extends Controller
                     'cause' => $validated['cause'],
                     'application_status' => 0 //0=未申請、1=申請、2=承認依頼、3=承認済み
                 ]);
-
             });
         } catch (QueryException $e) {
             // データベースクエリ関連のエラーハンドリング
@@ -123,9 +122,9 @@ class OvertimeSheetController extends Controller
      */
     public function show(OvertimeSheet $overtimeSheet)
     {
-        Gate::authorize('view', $overtimeSheet);//ポリシーのviewメソッドを使用して認可を確認
+        Gate::authorize('view', $overtimeSheet); //ポリシーのviewメソッドを使用して認可を確認
 
-        $overtimeSheet->load('overtimeRequest.workPattern', 'overtimeReport');//$overtimeSheetはクエリビルダではないため、withや->where('user_id', Auth::id())は使えないeagerロードのloadメソッドを使用する
+        $overtimeSheet->load('overtimeRequest.workPattern', 'overtimeReport'); //$overtimeSheetはクエリビルダではないため、withや->where('user_id', Auth::id())は使えないeagerロードのloadメソッドを使用する
         // $overtimeSheet = Auth::user()->overtimeSheets()->with('overtimeRequest.workPattern')->with('overtimeReport')->where('id', $overtimeSheet->id)->first();
         // 上記コメントのコードでは、リソースコントローラが持つshowメソッドの理想とした使い方に反している。既にモデルバインディングで取れてる為、再取得する必要性がないため
 
@@ -137,12 +136,22 @@ class OvertimeSheetController extends Controller
      */
     public function edit(string $id)
     {
-        $overtimeSheet = OvertimeSheet::findOrFail($id);//モデルバインディングを使用せず、IDで直接取得する場合はfindOrFailを使用して、存在しないIDが指定された場合に404エラーを返すようにする
-    
-        Gate::authorize('update', $overtimeSheet);//ポリシーのupdateメソッドを使用して認可を確認
 
-        $overtimeSheet->load('overtimeRequest.workPattern');//リレーション先のデータも取得
-        
+        try {
+
+            $overtimeSheet = OvertimeSheet::findOrFail($id); //モデルバインディングを使用せず、IDで直接取得する場合はfindOrFailを使用して、存在しないIDが指定された場合に404エラーを返すようにする
+
+            Gate::authorize('update', $overtimeSheet); //ポリシーのupdateメソッドを使用して認可を確認
+
+            $overtimeSheet->load('overtimeRequest.workPattern'); //リレーション先のデータも取得
+
+        } catch (\Exception $e) {
+
+            Log::error($e->getMessage(), ['exception' => $e, 'エラーメッセージ' => '予期せぬエラーが発生しました。']);
+            
+            return redirect()->route('error');
+        }
+
         return view('overtime_sheets.edit', compact('overtimeSheet'));
     }
 
