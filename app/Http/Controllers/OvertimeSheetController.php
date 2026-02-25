@@ -143,21 +143,22 @@ class OvertimeSheetController extends Controller
 
             $overtimeSheet = OvertimeSheet::findOrFail($id); //モデルバインディングを使用せず、IDで直接取得する場合はfindOrFailを使用して、存在しないIDが指定された場合に404エラーを返すようにする
 
+            //throw new ModelNotFoundException; //テスト用の例外
+
             Gate::authorize('update', $overtimeSheet); //ポリシーのupdateメソッドを使用して認可を確認
+            
+            //throw new AuthorizationException; //テスト用の例外
 
             $overtimeSheet->load('overtimeRequest.workPattern'); //リレーション先のデータも取得
 
         } catch (ModelNotFoundException $e) {//\Exception
             //findOrFail($id)が取得できないとき、404エラーを投げるため、ModelNotFoundExceptionをキャッチしてエラーハンドリングする
-            throw new ModelNotFoundException; //テスト用の例外
 
             Log::error($e->getMessage(), ['exception' => $e, 'エラーメッセージ' => 'OvertimeSheet::findOrFail($id)にてエラーが発生しました。']);
             
             return redirect()->route('error');
         } catch (AuthorizationException $e) {
             //Gate::authorize()認可できないとき、エラーを投げるため、AuthorizationExceptionをキャッチしてエラーハンドリングする
-
-            //throw new AuthorizationException;　テスト用の例外
 
             Log::error($e->getMessage(), ['exception' => $e, 'エラーメッセージ' => 'Gate::authorize()にて認可エラーが発生しました。']);
             
