@@ -149,12 +149,15 @@ class OvertimeSheetController extends Controller
 
         } catch (ModelNotFoundException $e) {//\Exception
             //findOrFail($id)が取得できないとき、404エラーを投げるため、ModelNotFoundExceptionをキャッチしてエラーハンドリングする
+            throw new ModelNotFoundException; //テスト用の例外
 
             Log::error($e->getMessage(), ['exception' => $e, 'エラーメッセージ' => 'OvertimeSheet::findOrFail($id)にてエラーが発生しました。']);
             
             return redirect()->route('error');
         } catch (AuthorizationException $e) {
             //Gate::authorize()認可できないとき、エラーを投げるため、AuthorizationExceptionをキャッチしてエラーハンドリングする
+
+            //throw new AuthorizationException;　テスト用の例外
 
             Log::error($e->getMessage(), ['exception' => $e, 'エラーメッセージ' => 'Gate::authorize()にて認可エラーが発生しました。']);
             
