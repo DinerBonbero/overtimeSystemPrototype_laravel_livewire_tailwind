@@ -147,7 +147,7 @@ class OvertimeSheetController extends Controller
 
             Gate::authorize('update', $overtimeSheet); //ポリシーのupdateメソッドを使用して認可を確認
             
-            //throw new AuthorizationException; //テスト用の例外
+            throw new AuthorizationException; //テスト用の例外
 
             $overtimeSheet->load('overtimeRequest.workPattern'); //リレーション先のデータも取得
 
