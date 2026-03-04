@@ -178,7 +178,7 @@ class OvertimeSheetController extends Controller
             return redirect()->route('error');
         }
 
-        return view('overtime_sheets.edit', compact('overtimeSheet'));
+        return view('overtime_sheets.index', compact('overtimeSheet'));
     }
 
     /**
